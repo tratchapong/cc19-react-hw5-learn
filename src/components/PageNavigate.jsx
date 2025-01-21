@@ -17,7 +17,7 @@ function PageNavigate(props) {
 		setCurrentPage(e.target.value)
 	}
 	return (
-		<div className='flex items-center gap-1 border'>
+		<div className='flex items-center gap-2 rounded-sm pt-4'>
 			<button
 				className='btn btn-xs btn-primary'
 				onClick={()=>hdlClick(-1)}

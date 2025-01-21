@@ -20,17 +20,20 @@ function App() {
     setTotal(resp.data.total)
     setProducts(resp.data.products)
   }
+  useEffect(()=>{
+    setCurrentPage(1)
+  },[searchText])
 
   useEffect( ()=>{
     fetchProducts(searchText,currentPage)
   }, [searchText,currentPage] )
 
   return (
-    <div className="bg-slate-400 max-w-screen-sm m-5 p-3">
-      <h1 className="text-3xl text-pink-500 hover:underline">
-        Product Search
+    <div className="bg-slate-400 max-w-screen-sm m-5 p-3 flex flex-col gap-3">
+      <h1 className="text-3xl text-blue-700 hover:underline">
+        Product Search : CC19
       </h1>
-      <div className="flex gap-4">
+      <div className="flex gap-4 justify-between">
         <SearchBar searchText={searchText} setSearchText={setSearchText}/>
         <PageNavigate 
           currentPage={currentPage}
