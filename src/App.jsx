@@ -6,16 +6,22 @@ import axios from "axios"
 
 function App() {
   const [products, setProducts] = useState([])
+  const [searchText, setSearchText] = useState('')
+  const [currentPage, setCurrentPage] = useState(1)
+  const [total, setTotal]  = useState(0)
 
   const fetchProducts = async () => {
-    const resp = await axios.get(`https://dummyjson.com/products`)
+    const resp = await axios.get(
+      `https://dummyjson.com/products/search?q=${searchText}&limit=10&skip=20`
+    )
     console.log(resp.data)
+    setTotal(resp.data.total)
     setProducts(resp.data.products)
   }
 
   useEffect( ()=>{
     fetchProducts()
-  }, [] )
+  }, [searchText] )
 
   return (
     <div className="bg-slate-400 max-w-screen-sm m-5 p-3">
@@ -23,8 +29,12 @@ function App() {
         Product Search
       </h1>
       <div className="flex gap-4">
-        <SearchBar />
-        <PageNavigate />
+        <SearchBar searchText={searchText} setSearchText={setSearchText}/>
+        <PageNavigate 
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          total={total}
+        />
       </div>
       <ProductList products={products}/>
 
