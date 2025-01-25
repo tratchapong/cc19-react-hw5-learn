@@ -3,7 +3,7 @@ import React from 'react'
 function PageNavigate(props) {
 	const {currentPage,setCurrentPage,total} = props
 	const start = (currentPage-1)*10+1
-	const end =  currentPage*10
+	const end =  Math.min(currentPage*10, total)
 	const hdlClick = (n) => {
 		if(currentPage+n < 1) {
 			return
@@ -22,7 +22,7 @@ function PageNavigate(props) {
 				className='btn btn-xs btn-primary'
 				onClick={()=>hdlClick(-1)}
 			>Prev</button>
-			<input className='w-10' 
+			<input className='w-10 text-center' 
 				value={currentPage}
 				onChange={hdlChange}
 			/>
